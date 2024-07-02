@@ -1,16 +1,17 @@
 import { View, themeColor } from "./system/Themed";
 import { Image, TouchableOpacity } from "react-native";
-import { router } from "expo-router";
+import { router, usePathname } from "expo-router";
 
-const Header = () => {
-  
+const Header = ({ cartPage }: { cartPage?: boolean }) => {
   return (
     <View className="flex-row items-center justify-between pr-4">
       <View>
-        <Image
-          tintColor={themeColor}
-          source={require("@/assets/items/Menu.png")}
-        />
+        {!cartPage && (
+          <Image
+            tintColor={themeColor}
+            source={require("@/assets/items/Menu.png")}
+          />
+        )}
       </View>
       <View>
         <Image
@@ -23,12 +24,14 @@ const Header = () => {
           tintColor={themeColor}
           source={require("@/assets/items/Search.png")}
         />
-        <TouchableOpacity onPress={() => router.push("/cart")}>
-          <Image
-            tintColor={themeColor}
-            source={require("@/assets/items/shoppingBag.png")}
-          />
-        </TouchableOpacity>
+        {!cartPage && (
+          <TouchableOpacity onPress={() => router.push("/cart")}>
+            <Image
+              tintColor={themeColor}
+              source={require("@/assets/items/shoppingBag.png")}
+            />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );

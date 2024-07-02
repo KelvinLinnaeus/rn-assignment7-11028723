@@ -58,7 +58,7 @@ export function SafeAreaView(props: ViewProps) {
     { light: lightColor, dark: darkColor },
     "background"
   );
-
+  GetTheme();
   return (
     <DefaultSafeAreaView style={[{ backgroundColor }, style]} {...otherProps} />
   );

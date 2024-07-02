@@ -1,59 +1,9 @@
 import { View, Text } from "@/components/system/Themed";
+import { products } from "@/utils/Products";
 import React from "react";
 import { FlatList, Image, TouchableOpacity } from "react-native";
 
 const ProductCard = () => {
-  const products = [
-    {
-      id: "prod1",
-      name: "Office Wear",
-      description: "reversible angora cardigan",
-      price: 120,
-      image: require("@/assets/items/dress1.png"),
-    },
-    {
-      id: "prod2",
-      name: "Black",
-      description: "reversible angora cardigan",
-      price: 120,
-      image: require("@/assets/items/dress2.png"),
-    },
-    {
-      id: "prod3",
-      name: "Church Wear",
-      description: "reversible angora cardigan",
-      price: 120,
-      image: require("@/assets/items/dress3.png"),
-    },
-    {
-      id: "prod4",
-      name: "Lamerei",
-      description: "reversible angora cardigan",
-      price: 120,
-      image: require("@/assets/items/dress4.png"),
-    },
-    {
-      id: "prod5",
-      name: "21WN",
-      description: "reversible angora cardigan",
-      price: 120,
-      image: require("@/assets/items/dress5.png"),
-    },
-    {
-      id: "prod6",
-      name: "Lopo",
-      description: "reversible angora cardigan",
-      price: 120,
-      image: require("@/assets/items/dress6.png"),
-    },
-    {
-      id: "prod7",
-      name: "Lame",
-      description: "reversible angora cardigan",
-      price: 120,
-      image: require("@/assets/items/dress1.png"),
-    },
-  ];
   return (
     <View className="">
       <FlatList
