@@ -13,12 +13,12 @@ const Header = ({ cartPage }: { cartPage?: boolean }) => {
           />
         )}
       </View>
-      <View>
+      <TouchableOpacity onPress={() => router.push("/home")}>
         <Image
           tintColor={themeColor}
           source={require("@/assets/items/Logo.png")}
         />
-      </View>
+      </TouchableOpacity>
       <View className="flex-row w-16 justify-between">
         <Image
           tintColor={themeColor}

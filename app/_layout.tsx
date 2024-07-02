@@ -75,7 +75,7 @@ function RootLayoutNav() {
           options={{
             header: () => (
               <SafeAreaView className="pt-4 px-6">
-                <Header />
+                <Header cartPage />
               </SafeAreaView>
             ),
           }}
