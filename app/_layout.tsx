@@ -9,28 +9,23 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
-// App.js
-
 import { NativeWindStyleSheet } from "nativewind";
 
-NativeWindStyleSheet.setOutput({
-  default: "native",
-});
-
-import { useColorScheme } from "@/components/useColorScheme";
+import { useColorScheme } from "@/components/system/useColorScheme";
+import { SafeAreaView, Text } from "@/components/system/Themed";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
 } from "expo-router";
 
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "(tabs)",
-};
-
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+NativeWindStyleSheet.setOutput({
+  default: "native",
+});
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -61,10 +56,31 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+      <Stack
+      // screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen
+          name="home/index"
+          options={{
+            header: () => (
+              <SafeAreaView className="pt-4 px-6">
+                <Header />
+              </SafeAreaView>
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="cart/index"
+          options={{
+            header: () => (
+              <SafeAreaView className="pt-4 px-6">
+                <Header />
+              </SafeAreaView>
+            ),
+          }}
+        />
       </Stack>
+      {/* <Footer title="HomeScreen" /> */}
     </ThemeProvider>
   );
 }
