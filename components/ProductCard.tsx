@@ -21,7 +21,7 @@ const ProductCard = () => {
     setCart(updatedCart);
     await AsyncStorage.setItem("cart", JSON.stringify(updatedCart));
   };
-  console.log(cart);
+  // console.log(cart);
 
   return (
     <View className="">

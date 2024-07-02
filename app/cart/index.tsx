@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Container from "@/components/Container";
 import Footer from "@/components/Footer";
-import { Text } from "@/components/system/Themed";
+import { Text, View } from "@/components/system/Themed";
 import CartItem from "@/components/CartItem";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Product } from "@/components/ProductCard";
@@ -29,11 +29,15 @@ const Cart = () => {
     await AsyncStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
-  console.log(cart);
+  // console.log(cart);
   return (
     <Container>
-      <Text className="text-center text-xl mb-4">CHECKOUT</Text>
-      <CartItem cartItems={cart} removeFromCart={removeFromCart} />
+      <View className="flex-1 pb-20">
+        {cart.length > 0 && (
+          <Text className="text-center text-xl mb-4">CHECKOUT</Text>
+        )}
+        <CartItem cartItems={cart} removeFromCart={removeFromCart} />
+      </View>
     </Container>
   );
 };

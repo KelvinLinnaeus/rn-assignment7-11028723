@@ -15,8 +15,8 @@ const CartItem: React.FC<CartItemProps> = ({ cartItems, removeFromCart }) => {
     <View>
       {cartItems.length === 0 ? (
         <TouchableOpacity onPress={() => router.push("/home")}>
-          <Text className=" ">No Items in Cart</Text>
-          <View className="flex-row text-center mt-4  justify-end self-end items-center space-x-3 w-[180px] ">
+          <Text className="text-center text-xl">Cart is Empty</Text>
+          <View className="flex-row text-center mt-4  justify-end self-end items-center space-x-3">
             <Ionicons name="arrow-back-outline" size={24} color="grey" />
             <Text className="text-slate-600  ">
               Go back and Continue Shopping

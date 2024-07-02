@@ -6,7 +6,7 @@ import ProductCard from "@/components/ProductCard";
 
 const Home = () => {
   return (
-    <Container>
+    <Container class="pb-20">
       <View className="flex-row mb-4">
         <Text className="flex-1 text-xl">OUR STORY</Text>
         <View className="flex-row  justify-between w-[100px]">
