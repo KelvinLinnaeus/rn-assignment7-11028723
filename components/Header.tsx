@@ -4,7 +4,7 @@ import { router, usePathname } from "expo-router";
 
 const Header = ({ cartPage }: { cartPage?: boolean }) => {
   return (
-    <View className="flex-row items-center justify-between pr-4">
+    <View className="flex-row items-center justify-between pr-2">
       <View>
         {!cartPage && (
           <Image
@@ -19,7 +19,9 @@ const Header = ({ cartPage }: { cartPage?: boolean }) => {
           source={require("@/assets/items/Logo.png")}
         />
       </TouchableOpacity>
-      <View className="flex-row w-16 justify-between">
+      <View
+        className={`flex-row w-16 justify-between ${cartPage && "justify-end"}`}
+      >
         <Image
           tintColor={themeColor}
           source={require("@/assets/items/Search.png")}

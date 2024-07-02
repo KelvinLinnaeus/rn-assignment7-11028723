@@ -8,9 +8,14 @@ import { router } from "expo-router";
 interface CartItemProps {
   cartItems: Product[];
   removeFromCart: (item: Product) => void;
+  total: number;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ cartItems, removeFromCart }) => {
+const CartItem: React.FC<CartItemProps> = ({
+  cartItems,
+  removeFromCart,
+  total,
+}) => {
   return (
     <View>
       {cartItems.length === 0 ? (
@@ -32,7 +37,7 @@ const CartItem: React.FC<CartItemProps> = ({ cartItems, removeFromCart }) => {
               <View key={index} className="flex-row space-x-4 mb-6">
                 <View className="w-[120px] h-[150px]">
                   <Image
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain rounded-sm"
                     source={item.image}
                   />
                 </View>
@@ -54,6 +59,10 @@ const CartItem: React.FC<CartItemProps> = ({ cartItems, removeFromCart }) => {
               </View>
             )}
           />
+          <View className="flex-row justify-between">
+            <Text>EST. TOTAL</Text>
+            <Text className="text-orange-600">$ {total}</Text>
+          </View>
         </View>
       )}
     </View>

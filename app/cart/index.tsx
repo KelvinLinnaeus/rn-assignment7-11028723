@@ -30,13 +30,24 @@ const Cart = () => {
   };
 
   // console.log(cart);
+  const total = cart.reduce((acc, cart) => acc + cart.price, 0);
+  // console.log(total);
   return (
-    <Container>
-      <View className="flex-1 pb-20">
+    <Container class="px-0">
+      <View className="flex-1 pb-20 px-6">
         {cart.length > 0 && (
           <Text className="text-center text-xl mb-4">CHECKOUT</Text>
         )}
-        <CartItem cartItems={cart} removeFromCart={removeFromCart} />
+
+        <CartItem
+          total={total}
+          cartItems={cart}
+          removeFromCart={removeFromCart}
+        />
+      </View>
+
+      <View className="">
+        <Footer />
       </View>
     </Container>
   );

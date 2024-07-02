@@ -36,7 +36,7 @@ const ProductCard = () => {
           >
             <Image
               source={item.image}
-              className="relative w-full"
+              className="relative w-full rounded-sm"
               resizeMode="cover"
             />
             <TouchableOpacity
