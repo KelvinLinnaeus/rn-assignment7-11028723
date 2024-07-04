@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 
 interface CartItemProps {
-  cartItems: Product[];
+  cartItems: Product[] | null;
   removeFromCart: (item: Product) => void;
   total: number;
 }
@@ -18,10 +18,10 @@ const CartItem: React.FC<CartItemProps> = ({
 }) => {
   return (
     <View>
-      {cartItems.length === 0 ? (
+      {cartItems?.length === 0 ? (
         <TouchableOpacity onPress={() => router.push("/home")}>
           <Text className="text-center text-xl">Cart is Empty</Text>
-          <View className="flex-row text-center mt-4  justify-end self-end items-center space-x-3">
+          <View className="flex-row text-center mt-4  justify-center items-center space-x-3">
             <Ionicons name="arrow-back-outline" size={24} color="grey" />
             <Text className="text-slate-600  ">
               Go back and Continue Shopping
@@ -29,7 +29,7 @@ const CartItem: React.FC<CartItemProps> = ({
           </View>
         </TouchableOpacity>
       ) : (
-        <View>
+        <>
           <FlatList
             showsVerticalScrollIndicator={false}
             data={cartItems}
@@ -63,7 +63,7 @@ const CartItem: React.FC<CartItemProps> = ({
             <Text>EST. TOTAL</Text>
             <Text className="text-orange-600">$ {total}</Text>
           </View>
-        </View>
+        </>
       )}
     </View>
   );

@@ -5,7 +5,7 @@ import { themeColor } from "./system/Themed";
 const Footer = ({ title }: { title?: string }) => {
   return (
     <View
-      className={`flex-row space-x-4 items-center  h-[60px] justify-center bg-black ${
+      className={`flex-row space-x-4 items-center  h-[50px] justify-center bg-black ${
         themeColor === "black" && "border-t-2 border-white "
       }`}
     >

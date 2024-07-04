@@ -10,11 +10,11 @@ const Home = () => {
       <View className="flex-row mb-4">
         <Text className="flex-1 text-xl">OUR STORY</Text>
         <View className="flex-row  justify-between w-[100px]">
-          <TouchableOpacity className="bg-slate-200 rounded-full p-3">
+          <TouchableOpacity className="bg-slate-200 rounded-full p-2">
             <Image source={require("@/assets/items/ListView.png")} />
           </TouchableOpacity>
 
-          <TouchableOpacity className="bg-slate-200 rounded-full p-3">
+          <TouchableOpacity className="bg-slate-200 rounded-full p-2">
             <Image source={require("@/assets/items/Filter.png")} />
           </TouchableOpacity>
         </View>

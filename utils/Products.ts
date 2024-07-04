@@ -46,6 +46,13 @@ export  const products = [
       name: "Lame",
       description: "reversible angora cardigan",
       price: 120,
-      image: require("@/assets/items/dress1.png"),
+      image: require("@/assets/items/dress4.png"),
     },
+    // {
+    //   id: "prod8",
+    //   name: "Office Wear",
+    //   description: "reversible angora cardigan",
+    //   price: 120,
+    //   image: require("@/assets/items/dress1.png"),
+    // },
   ];

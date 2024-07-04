@@ -5,49 +5,31 @@ import { Text, View } from "@/components/system/Themed";
 import CartItem from "@/components/CartItem";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Product } from "@/components/ProductCard";
+import { useCart } from "@/context/cartContext";
 
 const Cart = () => {
-  const [cart, setCart] = useState<Product[]>([]);
-  useEffect(() => {
-    const loadCart = async () => {
-      try {
-        const cartData = await AsyncStorage.getItem("cart");
-        if (cartData) {
-          setCart(JSON.parse(cartData));
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const { cartItems, loadCart, totalAmount, handleRemoveFromCart } = useCart();
 
+  useEffect(() => {
     loadCart();
   }, []);
 
-  const removeFromCart = async (product: Product) => {
-    const updatedCart = cart.filter((item) => item.id !== product.id);
-    setCart(updatedCart);
-    await AsyncStorage.setItem("cart", JSON.stringify(updatedCart));
-  };
-
-  // console.log(cart);
-  const total = cart.reduce((acc, cart) => acc + cart.price, 0);
-  // console.log(total);
   return (
     <Container class="px-0">
       <View className="flex-1 pb-20 px-6">
-        {cart.length > 0 && (
+        {cartItems?.length !== 0 && (
           <Text className="text-center text-xl mb-4">CHECKOUT</Text>
         )}
 
         <CartItem
-          total={total}
-          cartItems={cart}
-          removeFromCart={removeFromCart}
+          total={totalAmount}
+          cartItems={cartItems}
+          removeFromCart={handleRemoveFromCart}
         />
       </View>
 
       <View className="">
-        <Footer />
+        <Footer title="Checkout" />
       </View>
     </Container>
   );

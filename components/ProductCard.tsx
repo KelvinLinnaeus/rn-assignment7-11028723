@@ -1,4 +1,5 @@
 import { View, Text } from "@/components/system/Themed";
+import { useCart } from "@/context/cartContext";
 import { products } from "@/utils/Products";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
@@ -13,47 +14,50 @@ export type Product = {
 };
 
 const ProductCard = () => {
-  const [cart, setCart] = useState<Product[]>([]);
-
-  const addToCart = async (item: Product) => {
-    if (cart.find((cartItem) => cartItem.id === item.id)) return;
-    const updatedCart = [...cart, item];
-    setCart(updatedCart);
-    await AsyncStorage.setItem("cart", JSON.stringify(updatedCart));
-  };
-  // console.log(cart);
+  const { handleAddToCart } = useCart();
 
   return (
     <View className="">
       <FlatList
+        columnWrapperStyle={{
+          alignItems: "center",
+          justifyContent: "space-evenly",
+          display: "flex",
+          flexWrap: "wrap",
+        }}
         numColumns={2}
         data={products}
         showsVerticalScrollIndicator={false}
         renderItem={({ index, item }) => (
-          <TouchableOpacity
+          <View
             key={index}
-            className=" mr-4 mb-5 pb-3  w-[174px]  "
+            className="mb-5 pb-3  w-[180px] overflow-hidden p-1 h-[350px]"
           >
-            <Image
-              source={item.image}
-              className="relative w-full rounded-sm"
-              resizeMode="cover"
-            />
-            <TouchableOpacity
-              // disabled
-              onPress={() => addToCart(item)}
-              className="absolute bottom-[135px] right-3"
-            >
+            <View>
               <Image
-                className=""
-                resizeMode="contain"
-                source={require("@/assets/items/add_circle.png")}
+                source={item.image}
+                className="relative w-full rounded-sm"
+                resizeMode="cover"
               />
-            </TouchableOpacity>
-            <Text className="font-bold mt-3">{item.name}</Text>
-            <Text className="text-slate-600">{item.description}</Text>
-            <Text className="text-orange-700 my-1">$ {item.price}</Text>
-          </TouchableOpacity>
+              <TouchableOpacity
+                // disabled
+                onPress={() => handleAddToCart(item)}
+                className="absolute bottom-2 right-2"
+              >
+                <Image
+                  className=""
+                  resizeMode="contain"
+                  source={require("@/assets/items/add_circle.png")}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <Text className="font-bold mt-3">{item.name}</Text>
+              <Text className="text-slate-600">{item.description}</Text>
+              <Text className="text-orange-700 my-1">$ {item.price}</Text>
+            </View>
+          </View>
         )}
         keyExtractor={(item) => item.id}
       />

@@ -15,6 +15,7 @@ import { useColorScheme } from "@/components/system/useColorScheme";
 import { SafeAreaView, Text } from "@/components/system/Themed";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CartContextProvider from "@/context/cartContext";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -57,31 +58,32 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack
-      // screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen
-          name="home/index"
-          options={{
-            header: () => (
-              <SafeAreaView className="pt-4 px-6">
-                <Header />
-              </SafeAreaView>
-            ),
-          }}
-        />
-        <Stack.Screen
-          name="cart/index"
-          options={{
-            header: () => (
-              <SafeAreaView className="pt-4 px-6">
-                <Header cartPage />
-              </SafeAreaView>
-            ),
-          }}
-        />
-      </Stack>
-      {/* <Footer title="HomeScreen" /> */}
+      <CartContextProvider>
+        <Stack
+        // screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen
+            name="home/index"
+            options={{
+              header: () => (
+                <SafeAreaView className="pt-4 px-6">
+                  <Header />
+                </SafeAreaView>
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="cart/index"
+            options={{
+              header: () => (
+                <SafeAreaView className="pt-4 px-6">
+                  <Header cartPage />
+                </SafeAreaView>
+              ),
+            }}
+          />
+        </Stack>
+      </CartContextProvider>
     </ThemeProvider>
   );
 }
