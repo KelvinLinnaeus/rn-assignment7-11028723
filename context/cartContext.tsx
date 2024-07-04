@@ -1,12 +1,7 @@
 import { Product } from "@/components/ProductCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useToast } from "react-native-toast-notifications";
 
 interface CartContextType {
   cartItems: Product[] | null;
@@ -25,13 +20,34 @@ export default function CartContextProvider({
 }) {
   const [cartItems, setCartItems] = useState<Product[] | null>(null);
   const [totalAmount, setTotalAmount] = useState(0);
+  const toast = useToast();
+  const toastDuration: number = 400;
+
+  useEffect(() => {
+    if (cartItems) {
+      const total = cartItems.reduce((acc, cart) => acc + cart.price, 0);
+      setTotalAmount(total);
+    }
+    loadCart();
+  }, [cartItems?.length]);
 
   const handleAddToCart = async (item: Product) => {
     if (cartItems) {
-      if (cartItems.find((cartItem) => cartItem.id === item.id)) return;
+      if (cartItems.find((cartItem) => cartItem.id === item.id))
+        return toast.show("Product Already in cart", {
+          type: "success",
+          duration: toastDuration,
+        });
       const updatedCart = [...cartItems, item];
       setCartItems(updatedCart);
-      await AsyncStorage.setItem("cart", JSON.stringify(updatedCart));
+      await AsyncStorage.setItem("cart", JSON.stringify(updatedCart))
+        .then(() => {
+          toast.show("Product Added", {
+            type: "success",
+            duration: toastDuration,
+          });
+        })
+        .catch((e) => console.log(e));
     }
   };
 
@@ -39,16 +55,16 @@ export default function CartContextProvider({
     if (cartItems) {
       const updatedCart = cartItems.filter((item) => item.id !== product.id);
       setCartItems(updatedCart);
-      await AsyncStorage.setItem("cart", JSON.stringify(updatedCart));
+      await AsyncStorage.setItem("cart", JSON.stringify(updatedCart))
+        .then(() => {
+          toast.show("Product Removed", {
+            type: "success",
+            duration: toastDuration,
+          });
+        })
+        .catch((e) => console.log(e));
     }
   };
-
-  useEffect(() => {
-    if (cartItems) {
-      const total = cartItems.reduce((acc, cart) => acc + cart.price, 0);
-      setTotalAmount(total);
-    }
-  }, [cartItems]);
 
   const loadCart = async () => {
     try {

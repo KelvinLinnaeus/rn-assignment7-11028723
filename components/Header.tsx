@@ -13,7 +13,7 @@ const Header = ({ cartPage }: { cartPage?: boolean }) => {
           />
         )}
       </View>
-      <TouchableOpacity onPress={() => router.push("/home")}>
+      <TouchableOpacity onPress={() => router.push("/")}>
         <Image
           tintColor={themeColor}
           source={require("@/assets/items/Logo.png")}

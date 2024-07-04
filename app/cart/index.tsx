@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from "react";
 import Container from "@/components/Container";
 import Footer from "@/components/Footer";
 import { Text, View } from "@/components/system/Themed";
 import CartItem from "@/components/CartItem";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Product } from "@/components/ProductCard";
 import { useCart } from "@/context/cartContext";
 
 const Cart = () => {
-  const { cartItems, loadCart, totalAmount, handleRemoveFromCart } = useCart();
-
-  useEffect(() => {
-    loadCart();
-  }, []);
+  const { cartItems, totalAmount, handleRemoveFromCart } = useCart();
 
   return (
     <Container class="px-0">

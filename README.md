@@ -7,14 +7,17 @@ This application allows users to view a list of available products, add products
 ### Components
 
 #### `HomeScreen`
+
 - Displays a list of available products.
 - Each product includes an "Add to cart" button.
 
 #### `CartScreen`
+
 - Displays the selected items in the cart.
 - Each item includes a "Remove from cart" button.
 
 ### Functionality
+
 - Users can view a list of available products.
 - Users can add products to their cart.
 - Users can remove products from their cart.
@@ -26,8 +29,9 @@ This application allows users to view a list of available products, add products
 
 ## Screenshot
 
-![Screenshot of the application](./screenshots/HomeScreen.png)
-![Screenshot of the application](./screenshots/CartScreen.png)
+![Screenshot of the application](./screenshots/HomeScreen.jpg)
+
+<!-- ![Screenshot of the application](./screenshots/CartScreen.jpg) -->
 
 ## Instructions to Run the Project
 
@@ -57,4 +61,3 @@ This application allows users to view a list of available products, add products
    press i # For iOS
    scan the QR Code generated to run on a physical device
    ```
-

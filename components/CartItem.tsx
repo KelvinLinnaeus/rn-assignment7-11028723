@@ -1,5 +1,4 @@
 import { FlatList, Image, TouchableOpacity } from "react-native";
-import React from "react";
 import { Product } from "./ProductCard";
 import { View, Text } from "@/components/system/Themed";
 import { Ionicons } from "@expo/vector-icons";
@@ -19,9 +18,9 @@ const CartItem: React.FC<CartItemProps> = ({
   return (
     <View>
       {cartItems?.length === 0 ? (
-        <TouchableOpacity onPress={() => router.push("/home")}>
+        <TouchableOpacity onPress={() => router.push("/")}>
           <Text className="text-center text-xl">Cart is Empty</Text>
-          <View className="flex-row text-center mt-4  justify-center items-center space-x-3">
+          <View className="flex-row mt-4  justify-center items-center space-x-3">
             <Ionicons name="arrow-back-outline" size={24} color="grey" />
             <Text className="text-slate-600  ">
               Go back and Continue Shopping

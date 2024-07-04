@@ -10,12 +10,11 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 import { NativeWindStyleSheet } from "nativewind";
-
 import { useColorScheme } from "@/components/system/useColorScheme";
-import { SafeAreaView, Text } from "@/components/system/Themed";
+import { SafeAreaView } from "@/components/system/Themed";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import CartContextProvider from "@/context/cartContext";
+import { ToastProvider } from "react-native-toast-notifications";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -58,32 +57,34 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <CartContextProvider>
-        <Stack
-        // screenOptions={{ headerShown: false }}
-        >
-          <Stack.Screen
-            name="home/index"
-            options={{
-              header: () => (
-                <SafeAreaView className="pt-4 px-6">
-                  <Header />
-                </SafeAreaView>
-              ),
-            }}
-          />
-          <Stack.Screen
-            name="cart/index"
-            options={{
-              header: () => (
-                <SafeAreaView className="pt-4 px-6">
-                  <Header cartPage />
-                </SafeAreaView>
-              ),
-            }}
-          />
-        </Stack>
-      </CartContextProvider>
+      <ToastProvider>
+        <CartContextProvider>
+          <Stack
+          // screenOptions={{ headerShown: false }}
+          >
+            <Stack.Screen
+              name="index"
+              options={{
+                header: () => (
+                  <SafeAreaView className="pt-4 px-6">
+                    <Header />
+                  </SafeAreaView>
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="cart/index"
+              options={{
+                header: () => (
+                  <SafeAreaView className="pt-4 px-6">
+                    <Header cartPage />
+                  </SafeAreaView>
+                ),
+              }}
+            />
+          </Stack>
+        </CartContextProvider>
+      </ToastProvider>
     </ThemeProvider>
   );
 }
