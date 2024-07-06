@@ -1,8 +1,8 @@
 import Container from "@/components/Container";
-import Footer from "@/components/Footer";
 import { Text, View } from "@/components/system/Themed";
 import CartItem from "@/components/CartItem";
 import { useCart } from "@/context/cartContext";
+import Footer from "@/components/footer/Footer";
 
 const Cart = () => {
   const { cartItems, totalAmount, handleRemoveFromCart } = useCart();

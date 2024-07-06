@@ -1,6 +1,6 @@
 import { Image } from "react-native";
 import { Text, View } from "react-native";
-import { themeColor } from "./system/Themed";
+import { themeColor } from "../system/Themed";
 
 const Footer = ({ title }: { title?: string }) => {
   return (

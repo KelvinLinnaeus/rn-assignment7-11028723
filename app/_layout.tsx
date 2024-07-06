@@ -82,6 +82,16 @@ function RootLayoutNav() {
                 ),
               }}
             />
+            <Stack.Screen
+              name="product_details/[id]"
+              options={{
+                header: () => (
+                  <SafeAreaView className="pt-4 px-6">
+                    <Header />
+                  </SafeAreaView>
+                ),
+              }}
+            />
           </Stack>
         </CartContextProvider>
       </ToastProvider>

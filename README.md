@@ -1,4 +1,4 @@
-# rn-assignment6-11028723
+# rn-assignment7-11028723
 
 ## Description
 
@@ -38,8 +38,8 @@ This application allows users to view a list of available products, add products
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/KelvinLinnaeus/rn-assignment6-11028723.git
-   cd rn-assignment6-11028723
+   git clone https://github.com/KelvinLinnaeus/rn-assignment7-11028723.git
+   cd rn-assignment7-11028723
    ```
 
 2. Install the dependencies:
