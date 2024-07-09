@@ -1,12 +1,12 @@
 import { FlatList, Image, TouchableOpacity } from "react-native";
-import { Product } from "./ProductCard";
+import { ProductType } from "./ProductCard";
 import { View, Text } from "@/components/system/Themed";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 
 interface CartItemProps {
-  cartItems: Product[] | null;
-  removeFromCart: (item: Product) => void;
+  cartItems: ProductType[] | null;
+  removeFromCart: (item: ProductType) => void;
   total: number;
 }
 
@@ -32,17 +32,24 @@ const CartItem: React.FC<CartItemProps> = ({
           <FlatList
             showsVerticalScrollIndicator={false}
             data={cartItems}
-            renderItem={({ item, index }) => (
+            renderItem={({
+              item,
+              index,
+            }: {
+              item: ProductType;
+              index: number;
+            }) => (
               <View key={index} className="flex-row space-x-4 mb-6">
-                <View className="w-[120px] h-[150px]">
+                <View className="w-[100px] h-[100px] m-auto">
                   <Image
-                    className="w-full h-full object-contain rounded-sm"
-                    source={item.image}
+                    resizeMode="cover"
+                    className="w-full object-fill h-full rounded-sm"
+                    source={{ uri: item.image }}
                   />
                 </View>
-                <View className="justify-center">
-                  <Text className="font-bold mt-3">{item.name}</Text>
-                  <Text className="text-slate-600">{item.description}</Text>
+                <View className="flex-1">
+                  <Text className="font-bold mt-3">{item.title}</Text>
+                  <Text className="text-slate-600">{item.category}</Text>
                   <Text className="text-orange-700 my-1">$ {item.price}</Text>
                   <TouchableOpacity
                     onPress={() => removeFromCart(item)}
@@ -60,7 +67,7 @@ const CartItem: React.FC<CartItemProps> = ({
           />
           <View className="flex-row justify-between">
             <Text>EST. TOTAL</Text>
-            <Text className="text-orange-600">$ {total}</Text>
+            <Text className="text-orange-600">$ {total.toFixed(2)}</Text>
           </View>
         </>
       )}

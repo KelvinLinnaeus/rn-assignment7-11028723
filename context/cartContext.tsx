@@ -1,12 +1,12 @@
-import { Product } from "@/components/ProductCard";
+import { ProductType } from "@/components/ProductCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useToast } from "react-native-toast-notifications";
 
 interface CartContextType {
-  cartItems: Product[] | null;
-  handleAddToCart: (product: Product) => void;
-  handleRemoveFromCart: (product: Product) => void;
+  cartItems: ProductType[] | null;
+  handleAddToCart: (product: ProductType) => void;
+  handleRemoveFromCart: (product: ProductType) => void;
   loadCart: () => void;
   totalAmount: number;
 }
@@ -18,40 +18,52 @@ export default function CartContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [cartItems, setCartItems] = useState<Product[] | null>(null);
+  const [cartItems, setCartItems] = useState<ProductType[] | null>(null);
   const [totalAmount, setTotalAmount] = useState(0);
   const toast = useToast();
   const toastDuration: number = 400;
+
+  useEffect(() => {
+    loadCart();
+  }, []);
 
   useEffect(() => {
     if (cartItems) {
       const total = cartItems.reduce((acc, cart) => acc + cart.price, 0);
       setTotalAmount(total);
     }
-    loadCart();
-  }, [cartItems?.length]);
+  }, [cartItems]);
 
-  const handleAddToCart = async (item: Product) => {
-    if (cartItems) {
-      if (cartItems.find((cartItem) => cartItem.id === item.id))
-        return toast.show("Product Already in cart", {
+  const handleAddToCart = async (item: ProductType) => {
+    let updatedCartItems = cartItems ? cartItems : [];
+
+    const existingItem = updatedCartItems.find(
+      (cartItem) => cartItem.id === item.id
+    );
+    if (existingItem) {
+      toast.show("Product Already in cart", {
+        type: "success",
+        duration: toastDuration,
+      });
+      return;
+    }
+
+    updatedCartItems = [...updatedCartItems, item];
+    setCartItems(updatedCartItems);
+
+    await AsyncStorage.setItem("cart", JSON.stringify(updatedCartItems))
+      .then(() => {
+        toast.show("Product Added", {
           type: "success",
           duration: toastDuration,
         });
-      const updatedCart = [...cartItems, item];
-      setCartItems(updatedCart);
-      await AsyncStorage.setItem("cart", JSON.stringify(updatedCart))
-        .then(() => {
-          toast.show("Product Added", {
-            type: "success",
-            duration: toastDuration,
-          });
-        })
-        .catch((e) => console.log(e));
-    }
+      })
+      .catch((e) => {
+        console.error("Error storing cart in AsyncStorage", e);
+      });
   };
 
-  const handleRemoveFromCart = async (product: Product) => {
+  const handleRemoveFromCart = async (product: ProductType) => {
     if (cartItems) {
       const updatedCart = cartItems.filter((item) => item.id !== product.id);
       setCartItems(updatedCart);
@@ -71,6 +83,8 @@ export default function CartContextProvider({
       const cartData = await AsyncStorage.getItem("cart");
       if (cartData) {
         setCartItems(JSON.parse(cartData));
+      } else {
+        setCartItems([]);
       }
     } catch (error) {
       console.error(error);

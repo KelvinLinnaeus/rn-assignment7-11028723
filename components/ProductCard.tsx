@@ -1,19 +1,8 @@
 import { View, Text } from "@/components/system/Themed";
 import { useCart } from "@/context/cartContext";
 import { truncateText } from "@/utils/truncateText";
-// import { products } from "@/utils/Products";
-import axios from "axios";
-import { Link } from "expo-router";
-import { useEffect, useState } from "react";
+import { Link, router } from "expo-router";
 import { FlatList, Image, TouchableOpacity } from "react-native";
-
-export type Product = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: any;
-};
 
 export type ProductType = {
   id: number;
@@ -28,19 +17,8 @@ export type ProductType = {
   };
 };
 
-const ProductCard = () => {
+const ProductCard = ({ products }: { products: any }) => {
   const { handleAddToCart } = useCart();
-  const [products, setProducts] = useState<ProductType | null>(null);
-
-  const fetchProducts = async () => {
-    await axios.get("https://fakestoreapi.com/products").then((res: any) => {
-      setProducts(res.data);
-    });
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   return (
     <View className="">
@@ -57,7 +35,7 @@ const ProductCard = () => {
         renderItem={({ item }: { item: ProductType }) => (
           <View
             key={item.id}
-            className="mb-5 pb-3  w-[150px] overflow-hidden p-1 h-[350px]"
+            className="mb-4 pb-3  w-[150px] px-3 overflow-hidden p-1 h-[320px]"
           >
             <View>
               <Image
@@ -78,7 +56,10 @@ const ProductCard = () => {
               </TouchableOpacity>
             </View>
 
-            <Link href={`/product_details/${item.id}`}>
+            <TouchableOpacity
+              className=""
+              onPress={() => router.push(`/product_details/${item.id}`)}
+            >
               <Text className="font-bold mt-3 ">
                 {truncateText(item.title)}
               </Text>
@@ -86,10 +67,10 @@ const ProductCard = () => {
                 {truncateText(item.description)}
               </Text>
               <Text className="text-orange-700 my-1">$ {item.price}</Text>
-            </Link>
+            </TouchableOpacity>
           </View>
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
       />
     </View>
   );

@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View } from "@/components/system/Themed";
 import Container from "@/components/Container";
 import { Image, TouchableOpacity } from "react-native";
-import ProductCard from "@/components/ProductCard";
+import ProductCard, { ProductType } from "@/components/ProductCard";
+import axios from "axios";
 
 const Home = () => {
+  const [products, setProducts] = useState<ProductType | null>(null);
+
+  const fetchProducts = async () => {
+    await axios.get("https://fakestoreapi.com/products").then((res: any) => {
+      setProducts(res.data);
+    });
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
     <Container class="pb-20">
       <View className="flex-row mb-4">
@@ -20,7 +33,7 @@ const Home = () => {
         </View>
       </View>
 
-      <ProductCard />
+      <ProductCard products={products} />
     </Container>
   );
 };

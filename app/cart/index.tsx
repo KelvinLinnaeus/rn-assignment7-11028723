@@ -6,7 +6,6 @@ import Footer from "@/components/footer/Footer";
 
 const Cart = () => {
   const { cartItems, totalAmount, handleRemoveFromCart } = useCart();
-
   return (
     <Container class="px-0">
       <View className="flex-1 pb-20 px-6">
