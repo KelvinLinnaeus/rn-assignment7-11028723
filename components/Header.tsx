@@ -69,8 +69,8 @@ const SideMenu = ({ handleToggle }: { handleToggle: () => void }) => {
     "Clothing",
   ];
   return (
-    <View className="absolute top-10 z-40 bottom-0 -left-4   right-0 flex-row">
-      <View className="h-screen pt-2 pl-4 flex-1">
+    <View className="absolute top-10 z-40 bottom-0 -left-4 -right-4 flex-row">
+      <View className="h-screen pt-2 pl-4 w-[250px]">
         <Text className="font-bold text-[17px] text-slate-800  ">
           Kelvin Mhacwilson
         </Text>
@@ -88,7 +88,7 @@ const SideMenu = ({ handleToggle }: { handleToggle: () => void }) => {
         </View>
       </View>
       <TouchableOpacity
-        className="opacity-40 bg-white w-[150px]  h-screen"
+        className="opacity-40 bg-white flex-1  h-screen"
         onPress={handleToggle}
       />
     </View>

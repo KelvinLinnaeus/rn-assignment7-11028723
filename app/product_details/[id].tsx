@@ -17,12 +17,14 @@ import { useCart } from "@/context/cartContext";
 const ProductDetails = ({}) => {
   const { id } = useLocalSearchParams();
   const [product, setProduct] = useState<ProductType | null>(null);
+  const [loading, setLoading] = useState(true);
   const [toggleOpen, setToggleOpen] = useState(false);
   const { handleAddToCart } = useCart();
 
   const fetchProductDetails = async () => {
     await axios.get(`https://fakestoreapi.com/products/${id}`).then((res) => {
       setProduct(res.data);
+      setLoading(false);
     });
   };
 
@@ -124,9 +126,11 @@ const ProductDetails = ({}) => {
           </View>
         </View>
 
-        <View className=" px-2 ">
-          <AddToBasketFooter product={product} />
-        </View>
+        {!loading && (
+          <View className=" px-2 ">
+            <AddToBasketFooter product={product} />
+          </View>
+        )}
       </ScrollView>
     </Container>
   );
