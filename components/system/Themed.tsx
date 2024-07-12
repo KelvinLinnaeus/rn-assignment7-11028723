@@ -3,6 +3,8 @@
  * https://docs.expo.io/guides/color-schemes/
  */
 
+import { Platform, StyleSheet } from "react-native";
+
 import {
   Appearance,
   Text as DefaultText,
@@ -67,6 +69,9 @@ export function SafeAreaView(props: ViewProps) {
 let themeColor: string;
 
 export const GetTheme = () => {
+  if (Platform.OS === "windows") {
+    return (themeColor = "black");
+  }
   if (Appearance.getColorScheme() === "light") {
     return (themeColor = "black");
   } else {

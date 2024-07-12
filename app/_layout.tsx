@@ -1,3 +1,4 @@
+// import "react-native-gesture-handler";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
   DarkTheme,
@@ -15,6 +16,8 @@ import { SafeAreaView } from "@/components/system/Themed";
 import Header from "@/components/Header";
 import CartContextProvider from "@/context/cartContext";
 import { ToastProvider } from "react-native-toast-notifications";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Drawer } from "expo-router/drawer";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -59,9 +62,7 @@ function RootLayoutNav() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <ToastProvider>
         <CartContextProvider>
-          <Stack
-          // screenOptions={{ headerShown: false }}
-          >
+          <Stack>
             <Stack.Screen
               name="index"
               options={{
@@ -84,6 +85,26 @@ function RootLayoutNav() {
             />
             <Stack.Screen
               name="product_details/[id]"
+              options={{
+                header: () => (
+                  <SafeAreaView className="pt-4 px-6">
+                    <Header />
+                  </SafeAreaView>
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="(drawer)"
+              options={{
+                header: () => (
+                  <SafeAreaView className="pt-4 px-6">
+                    <Header />
+                  </SafeAreaView>
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="checkout/index"
               options={{
                 header: () => (
                   <SafeAreaView className="pt-4 px-6">

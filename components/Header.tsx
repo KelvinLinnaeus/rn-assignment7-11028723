@@ -13,7 +13,7 @@ const Header = ({ cartPage }: { cartPage?: boolean }) => {
   return (
     <View>
       {toggleMenu && <SideMenu handleToggle={handleToggle} />}
-      <View className="flex-row items-center justify-between pr-2">
+      <View className="flex-row items-center justify-between pr-2 pb-2">
         <TouchableOpacity onPress={handleToggle}>
           {!cartPage && (
             <Image
@@ -88,7 +88,7 @@ const SideMenu = ({ handleToggle }: { handleToggle: () => void }) => {
         </View>
       </View>
       <TouchableOpacity
-        className="opacity-40 bg-white flex-1  h-screen"
+        className="opacity-10 bg-white flex-1  h-screen"
         onPress={handleToggle}
       />
     </View>

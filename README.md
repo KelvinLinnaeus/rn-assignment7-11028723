@@ -30,6 +30,7 @@ This application allows users to view a list of available products, add products
 ## Screenshot
 
 ![Screenshot of the application](./screenshots/HomeScreen.jpg)
+![Screenshot of the application](./screenshots/ProductDetails.jpg)
 
 <!-- ![Screenshot of the application](./screenshots/CartScreen.jpg) -->
 

@@ -20,7 +20,7 @@ const Cart = () => {
         />
       </View>
 
-      <View className="">
+      <View>
         <Footer title="Checkout" />
       </View>
     </Container>

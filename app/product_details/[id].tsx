@@ -22,10 +22,15 @@ const ProductDetails = ({}) => {
   const { handleAddToCart } = useCart();
 
   const fetchProductDetails = async () => {
-    await axios.get(`https://fakestoreapi.com/products/${id}`).then((res) => {
-      setProduct(res.data);
-      setLoading(false);
-    });
+    await axios
+      .get(`https://fakestoreapi.com/products/${id}`)
+      .then((res) => {
+        setProduct(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -34,7 +39,7 @@ const ProductDetails = ({}) => {
 
   return (
     <Container class="p-0">
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View className="h-72 px-1">
           <Image className="w-full h-full" source={{ uri: product?.image }} />
         </View>

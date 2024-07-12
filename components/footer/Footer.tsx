@@ -1,6 +1,7 @@
 import { Image } from "react-native";
 import { Text, View } from "react-native";
 import { themeColor } from "../system/Themed";
+import { Link } from "expo-router";
 
 const Footer = ({ title }: { title?: string }) => {
   return (
@@ -13,7 +14,9 @@ const Footer = ({ title }: { title?: string }) => {
         tintColor={"white"}
         source={require("@/assets/items/shoppingBag.png")}
       />
-      <Text className="text-white">{title}</Text>
+      <Link href={"/checkout"} className="text-white">
+        {title}
+      </Link>
     </View>
   );
 };

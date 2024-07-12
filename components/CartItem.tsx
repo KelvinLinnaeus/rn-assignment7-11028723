@@ -2,7 +2,7 @@ import { FlatList, Image, TouchableOpacity } from "react-native";
 import { ProductType } from "./ProductCard";
 import { View, Text } from "@/components/system/Themed";
 import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { Link, router } from "expo-router";
 
 interface CartItemProps {
   cartItems: ProductType[] | null;
@@ -48,8 +48,15 @@ const CartItem: React.FC<CartItemProps> = ({
                   />
                 </View>
                 <View className="flex-1">
-                  <Text className="font-bold mt-3">{item.title}</Text>
-                  <Text className="text-slate-600">{item.category}</Text>
+                  <Link
+                    href={`/product_details/${item.id}`}
+                    className="font-bold mt-3 cursor-pointer"
+                  >
+                    <Text>{item.title}</Text>
+                  </Link>
+                  <Text className="text-slate-600 capitalize">
+                    {item.category}
+                  </Text>
                   <Text className="text-orange-700 my-1">$ {item.price}</Text>
                   <TouchableOpacity
                     onPress={() => removeFromCart(item)}
