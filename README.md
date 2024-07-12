@@ -2,7 +2,7 @@
 
 ## Description
 
-This application allows users to view a list of available products, add products to their cart, and manage their selected items efficiently. Users can store their selected items locally on the device using AsyncStorage. The app includes a HomeScreen to display products and a CartScreen to manage the items in the cart.
+This application allows users to view a list of available products, add products to their cart, and manage their selected items efficiently. Users can store their selected items locally on the device using AsyncStorage. The app includes a HomeScreen to display products, a product detail screen to view the details of a product, Checkout and a CartScreen to manage the items in the cart.
 
 ### Components
 
@@ -16,12 +16,17 @@ This application allows users to view a list of available products, add products
 - Displays the selected items in the cart.
 - Each item includes a "Remove from cart" button.
 
+#### `Product Details`
+
+- Displays the details of the selected item.
+
 ### Functionality
 
 - Users can view a list of available products.
 - Users can add products to their cart.
 - Users can remove products from their cart.
 - Users can view the items in their cart.
+- Users can view the details of a product
 
 ## Student ID
 
